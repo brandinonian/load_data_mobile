@@ -10,7 +10,7 @@ export default function LoadDetails({ route }) {
   const [load_data, set_load_data] = useState();
 
   async function fetch_data() {
-    const result = get_load(id);
+    const result = await get_load(id);
     set_load_data(result);
   }
 
@@ -28,7 +28,7 @@ export default function LoadDetails({ route }) {
 
   return (
     <View style={styles.details_container}>
-
+      <Text>{load_data}</Text>
     </View>
   );
 }

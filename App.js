@@ -3,16 +3,30 @@ import HomeScreen from './screens/HomeScreen';
 import AddLoad from './screens/AddLoad';
 import { useEffect, useState } from 'react';
 import LoadDetails from './screens/LoadDetails';
+import LoadingScreen from './screens/LoadingScreen';
+import { init_db } from './db/init';
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
 
-  const [isLoading, setIsLoading] = useState(true);
+  const [is_loadinig, set_is_loading] = useState(true);
+
+  async function init() {
+    set_is_loading(true);
+    await init_db();
+    set_is_loading(false);
+  }
 
   useEffect(() => {
-    // TODO: init db
+    init();
   }, []);
+
+  if (is_loadinig) {
+    return (
+      <LoadingScreen message="Loading..." />
+    )
+  }
 
   return (
     <Stack.Navigator>
